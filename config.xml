@@ -8,6 +8,6 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <icon src="android/res/drawable-xhdpi/Icon.png" />
+    <icon src="smileyMiss.png" />
     <preference name="permissions" value="none"/>
 </widget>
