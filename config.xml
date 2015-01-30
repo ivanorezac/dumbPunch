@@ -1,0 +1,13 @@
+<widget id="com.ivanorezac.dumbPunch" version="0.0.1">
+    <name>Dumb Punch</name>
+    <description>
+        My first game
+    </description>
+    <author email="ivanorezac2@gmail.com" href="http://ivanorezac.com">
+        Ivanorezac
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <icon src="android/res/drawable-xhdpi/Icon.png" />
+    <preference name="permissions" value="none"/>
+</widget>
