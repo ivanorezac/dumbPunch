@@ -17,7 +17,6 @@ function onDeviceReady() {
     document.addEventListener("menubutton", doNothing, false);
 	document.addEventListener("backbutton", doNothing, false);
 	setSmileySize();
-	createSmiley();
 	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 	scoreUpdateInterval = setTimeout(updateTime,1000);
 }
@@ -26,12 +25,12 @@ function updateTime() {
 		time--;
 		updateScoreBoard();
 		scoreUpdateInterval = setTimeout(updateTime,1000);
-		if(time == 0) {
+		if(time < 1) {
 			clearTimeout(scoreUpdateInterval);
 			clearTimeout(createSmileyInterval);
 			$('.smiley').remove();
 			$('.scoreChange').toggle();
-			$('#score').text('Game over! You lost time!');
+			$('#score').text('Game over! You ran out of time!');
 			gameOver = 1;
 		}
 	}
