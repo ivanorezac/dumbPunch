@@ -29,8 +29,6 @@ function updateTime() {
 		if(time == 0) {
 			clearTimeout(scoreUpdateInterval);
 			clearTimeout(createSmileyInterval);
-			createSmileyInterval.stop();
-			scoreUpdateInterval.stop();
 			$('.smiley').remove();
 			$('.scoreChange').toggle();
 			$('#score').text('Game over! You lost time!');
