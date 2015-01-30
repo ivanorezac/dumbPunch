@@ -3,6 +3,14 @@ body {
 	margin: 0;
 }
 
+img::-moz-selection{
+    background-color:Transparent;
+}
+
+img::selection {
+	background-color:Transparent;
+}
+
 .scoreChange {
 	position: absolute;
 	left:0;
