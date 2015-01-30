@@ -15,9 +15,7 @@ function onDeviceReady() {
     document.addEventListener("menubutton", doNothing, false);
 	document.addEventListener("backbutton", doNothing, false);
 	setSmileySize();
-	var faster = smileyCount*40;
-	if(faster > 800) { faster = 800; }
-	createSmileyInterval = setInterval(createSmiley,1200-faster);
+	createSmileyInterval = setInterval(createSmiley,1200);
 	createSmiley();
 	scoreUpdateInterval = setInterval(updateTime,1000);
 }
@@ -61,7 +59,7 @@ function createSmiley() {
 	smileyAlive++;
 	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
-	var missedTimeout = setTimeout(missed,(5000-smileyCount*200), smileyCount);
+	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
 		$(this).toggle( "explode" );
 		updateScore(15);
