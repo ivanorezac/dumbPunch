@@ -3,11 +3,10 @@ var smileyCount = 0;
 var score = 0;
 var smileyAlive = 0;
 var smileyDimension = 30;
-var screenHeight = $(window).height();
-var screenWidth = $(window).width();
 var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
+var screenHeight, screenWidth;
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
     if(debug) onDeviceReady();
@@ -16,9 +15,9 @@ function onDeviceReady() {
     document.addEventListener("menubutton", doNothing, false);
 	document.addEventListener("backbutton", doNothing, false);
 	setSmileySize();
-	var faster = smileyCount*100;
-	if(faster > 2500) { faster = 2500; }
-	createSmileyInterval = setInterval(createSmiley,3000-faster);
+	var faster = smileyCount*40;
+	if(faster > 800) { faster = 800; }
+	createSmileyInterval = setInterval(createSmiley,1200-faster);
 	createSmiley();
 	scoreUpdateInterval = setInterval(updateTime,1000);
 }
@@ -62,11 +61,11 @@ function createSmiley() {
 	smileyAlive++;
 	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
-	var missedTimeout = setTimeout(missed,(5000+smileyCount*200), smileyCount);
+	var missedTimeout = setTimeout(missed,(5000-smileyCount*200), smileyCount);
 	smiley.click(function() {
 		$(this).toggle( "explode" );
 		updateScore(15);
-		time+=3;
+		time+=2;
 		smileyAlive--;
 		clearTimeout(missedTimeout);
 		$(this).remove();
@@ -99,10 +98,16 @@ function smileyRandomHeight() {
 function smileyRandomWidth() {
 	return Math.round(Math.abs(Math.random()*(screenWidth)-smileyDimension));
 }
+function getScreenSize() {
+	screenHeight = $(window).height();
+	screenWidth = $(window).width();
+}
 function setSmileySize() {
+	getScreenSize();
 	smileyDimension = screenHeight/20;
 	if(smileyDimension > screenWidth/20) {
 		smileyDimension = screenWidth/20;
 	}
 }
+$( window ).resize(function() {getScreenSize(); setSmileySize();});
 function doNothing() {}

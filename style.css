@@ -13,13 +13,13 @@ body {
 
 #score {
 	color: white;
-	font-size: 50px;
+	font-size: 25px;
 	text-align: center;
 }
 
 .changeElement {
 	color: white;
-	font-size: 50px;
+	font-size: 15px;
 	float: left;
 	padding: 0 15px;
 }
