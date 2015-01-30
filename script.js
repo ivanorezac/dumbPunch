@@ -7,6 +7,8 @@ var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
+var smileySpawnTime = 2.3; // seconds
+
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
     if(debug) onDeviceReady();
@@ -15,17 +17,20 @@ function onDeviceReady() {
     document.addEventListener("menubutton", doNothing, false);
 	document.addEventListener("backbutton", doNothing, false);
 	setSmileySize();
-	createSmileyInterval = setInterval(createSmiley,1200);
 	createSmiley();
-	scoreUpdateInterval = setInterval(updateTime,1000);
+	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
+	scoreUpdateInterval = setTimeout(updateTime,1000);
 }
 function updateTime() {
 	if(gameOver == 0) {
 		time--;
 		updateScoreBoard();
+		scoreUpdateInterval = setTimeout(updateTime,1000);
 		if(time == 0) {
-			clearInterval(scoreUpdateInterval);
-			clearInterval(createSmileyInterval);
+			clearTimeout(scoreUpdateInterval);
+			clearTimeout(createSmileyInterval);
+			createSmileyInterval.stop();
+			scoreUpdateInterval.stop();
 			$('.smiley').remove();
 			$('.scoreChange').toggle();
 			$('#score').text('Game over! You lost time!');
@@ -68,6 +73,7 @@ function createSmiley() {
 		clearTimeout(missedTimeout);
 		$(this).remove();
 	});
+	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 }
 function missed(id) {
 	if(gameOver == 0) {
