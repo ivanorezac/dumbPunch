@@ -1,4 +1,4 @@
-var debug = 1;
+var debug = 0;
 var smileyCount = 0;
 var score = 0;
 var smileyAlive = 0;
@@ -11,7 +11,10 @@ var smileySpawnTime = 0.5; // seconds
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
-    if(debug) onDeviceReady();
+    if(debug) {
+    	onDeviceReady();
+    	$('.score').text('debugging');
+    }
 }
 function onDeviceReady() {
     document.addEventListener("menubutton", doNothing, false);
