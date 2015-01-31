@@ -7,7 +7,7 @@ var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
-var smileySpawnTime = 0.8; // seconds
+var smileySpawnTime = 0.5; // seconds
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -15,6 +15,7 @@ function onLoad() {
     	onDeviceReady();
     	$('.score').text('debugging');
     }
+    countFps();
 }
 function onDeviceReady() {
     document.addEventListener("menubutton", doNothing, false);
@@ -63,10 +64,10 @@ function createSmiley() {
 	smileyAlive++;
 	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
-	var missedTimeout = setTimeout(missed,(2500), smileyCount);
+	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
 		$(this).toggle('explode');
-		updateScore(15);
+		updateScore(1);
 		time+=2;
 		smileyAlive--;
 		clearTimeout(missedTimeout);
@@ -84,7 +85,7 @@ function missed(id) {
 		$("body").append(smileyMiss);
 		$('#missed'+id).addClass('rotate');
 		smileyMiss.click(function() {
-			updateScore(-15);
+			updateScore(-3);
 			smileyMiss.attr('src','blood.png');
 		});
 		setTimeout(function() {
@@ -114,3 +115,35 @@ function setSmileySize() {
 }
 $( window ).resize(function() {getScreenSize(); setSmileySize();});
 function doNothing() {}
+
+
+//fps:
+
+function countFps() {
+	getScreenSize();
+	$('.fps').css({top: screenHeight-40, left: screenWidth-80});
+	gameLoop();
+}
+
+var fps = {
+	startTime : 0,
+	frameNumber : 0,
+	getFPS : function(){
+		this.frameNumber++;
+		var d = new Date().getTime(),
+			currentTime = ( d - this.startTime ) / 1000,
+			result = Math.floor( ( this.frameNumber / currentTime ) );
+
+		if( currentTime > 1 ){
+			this.startTime = new Date().getTime();
+			this.frameNumber = 0;
+		}
+		return result;
+
+	}	
+};
+
+function gameLoop(){
+	setTimeout( gameLoop,1000 / 60 );
+	document.querySelector("#fps").innerHTML = fps.getFPS();
+}

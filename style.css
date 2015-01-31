@@ -31,3 +31,10 @@ img::selection {
 	float: left;
 	padding: 0 15px;
 }
+
+.fps {
+	width: 80px;
+	height: 40px;
+	position: absolute;
+	color: white;
+}
