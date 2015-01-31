@@ -1,4 +1,4 @@
-var debug = 1;
+var debug = 0;
 var smileyCount = 0;
 var score = 0;
 var smileyAlive = 0;
