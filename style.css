@@ -12,12 +12,16 @@ img::selection {
 }
 
 .smiley {
+	touch-action: manipulation;
+	-ms-touch-action: manipulation;
 	-webkit-animation:spin 5s linear;
     -moz-animation:spin 5s linear;
     animation:spin 5s linear;
 }
 
 .missedSmiley {
+	touch-action: manipulation;
+	-ms-touch-action: manipulation;
 	-webkit-animation:spin 3s linear;
     -moz-animation:spin 3s linear;
     animation:spin 3s linear;

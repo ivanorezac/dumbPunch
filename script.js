@@ -1,4 +1,4 @@
-var debug = 1;
+var debug = 0;
 var smileyCount = 0;
 var score = 0;
 var smileyAlive = 0;
@@ -10,6 +10,8 @@ var screenHeight, screenWidth;
 var smileySpawnTime = 0.85; // seconds
 
 function onLoad() {
+	var attachFastClick = Origami.fastclick;
+	attachFastClick(document.body);
     document.addEventListener("deviceready", onDeviceReady, false);
     if(debug) {
     	onDeviceReady();
