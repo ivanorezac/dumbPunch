@@ -7,7 +7,7 @@ var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
-var smileySpawnTime = 2.3; // seconds
+var smileySpawnTime = 1; // seconds
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -43,10 +43,9 @@ function updateScoreBoard() {
 function updateScore(amount) {
 	score += amount;
 	updateScoreBoard();
+		plusSign = '';
 	if(amount > 0) {
 		plusSign = '+';
-	} else {
-		plusSign = '';
 	}
 	var changeElement = $("<div class='changeElement'>"+plusSign+amount+"</div><br />");
 	$(".scoreChange").append(changeElement);
@@ -61,7 +60,7 @@ function createSmiley() {
 	smileyAlive++;
 	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
-	var missedTimeout = setTimeout(missed,(5000), smileyCount);
+	var missedTimeout = setTimeout(missed,(3000), smileyCount);
 	smiley.click(function() {
 		$(this).toggle( "explode" );
 		updateScore(15);
@@ -105,9 +104,9 @@ function getScreenSize() {
 }
 function setSmileySize() {
 	getScreenSize();
-	smileyDimension = screenHeight/20;
-	if(smileyDimension > screenWidth/20) {
-		smileyDimension = screenWidth/20;
+	smileyDimension = screenHeight/8;
+	if(smileyDimension > screenWidth/8) {
+		smileyDimension = screenWidth/8;
 	}
 }
 $( window ).resize(function() {getScreenSize(); setSmileySize();});
