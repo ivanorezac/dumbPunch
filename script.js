@@ -7,7 +7,7 @@ var time = 45;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
-var smileySpawnTime = 0.85; // seconds
+var smileySpawnTime = 0.5; // seconds
 
 function onLoad() {
 	var attachFastClick = Origami.fastclick;
@@ -83,11 +83,17 @@ function createSmiley() {
 	$("body").append(smiley);
 	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
-		$(this).fadeOut(200, function() { $(this).remove(); }); //toggle('explode'); $(this).remove();
 		updateScore(1);
 		time+=2;
 		smileyAlive--;
 		clearTimeout(missedTimeout);
+		$(this).animate({
+		    opacity: 0.25,
+		    left: "+=50",
+		    height: "toggle"
+		  }, 400, function() {
+		    $(this).remove();
+		  });
 	});
 	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 }
@@ -104,6 +110,7 @@ function missed(id) {
 			time-=3;
 			//vibrate here;
 			smileyMiss.attr('src','blood.png');
+			smileyMiss.removeClass('missedSmiley');
 		});
 		setTimeout(function() {
 			smileyMiss.remove();
@@ -114,9 +121,7 @@ function removeMissed(id) {
 	$('#smiley'+id).remove();
 }
 function smileyRandomHeight() {
-	var height = Math.round(Math.abs(Math.random()*(screenHeight)-smileyDimension));
-	console.log(height);
-	return height;
+	return Math.round(Math.abs(Math.random()*(screenHeight)-smileyDimension));
 }
 function smileyRandomWidth() {
 	return Math.round(Math.abs(Math.random()*(screenWidth)-smileyDimension));
