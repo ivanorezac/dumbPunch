@@ -7,7 +7,7 @@ var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
-var smileySpawnTime = 0.5; // seconds
+var smileySpawnTime = 0.8; // seconds
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -65,7 +65,7 @@ function createSmiley() {
 	$("body").append(smiley);
 	var missedTimeout = setTimeout(missed,(2500), smileyCount);
 	smiley.click(function() {
-		$(this).toggle();//explode
+		$(this).toggle('explode');
 		updateScore(15);
 		time+=2;
 		smileyAlive--;
@@ -84,7 +84,7 @@ function missed(id) {
 		$("body").append(smileyMiss);
 		$('#missed'+id).addClass('rotate');
 		smileyMiss.click(function() {
-			updateScore(-30);
+			updateScore(-15);
 			smileyMiss.attr('src','blood.png');
 		});
 		setTimeout(function() {
