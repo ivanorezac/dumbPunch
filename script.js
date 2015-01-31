@@ -63,7 +63,7 @@ function createSmiley() {
 	smileyAlive++;
 	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
-	var missedTimeout = setTimeout(missed,(1500), smileyCount);
+	var missedTimeout = setTimeout(missed,(2500), smileyCount);
 	smiley.click(function() {
 		$(this).toggle();//explode
 		updateScore(15);
