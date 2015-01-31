@@ -1,9 +1,9 @@
-var debug = 0;
+var debug = 1;
 var smileyCount = 0;
 var score = 0;
 var smileyAlive = 0;
 var smileyDimension = 30;
-var time = 20;
+var time = 45;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
@@ -26,13 +26,13 @@ function onDeviceReady() {
 }
 function updateTime() {
 	if(gameOver == 0) {
-		time--;
 		updateScoreBoard();
 		scoreUpdateInterval = setTimeout(updateTime,1000);
 		if(time < 1) {
 			clearTimeout(scoreUpdateInterval);
 			clearTimeout(createSmileyInterval);
 			$('.smiley').remove();
+			$('.missedSmiley').remove();
 			$('.scoreChange').toggle();
 			$('#score').text('Game over! You ran out of time!');
 			gameOver = 1;
@@ -41,7 +41,22 @@ function updateTime() {
 }
 function updateScoreBoard() {
 	if(gameOver == 0) {
-		$('#score').text(time+'s ('+score+')');
+		$('#score').text(score);
+		gameTime();
+	}
+}
+
+function gameTime() {
+	if(time < 20) {
+		$('body').css({backgroundColor: '#b50000'})
+	} else if(time < 40) {
+		$('body').css({backgroundColor: '#af9e03'})
+	} else if(time < 60) {
+		$('body').css({backgroundColor: '#2d4558'})
+	} else if(time < 80) {
+		$('body').css({backgroundColor: '#0a7548'})
+	} else {
+		$('body').css({backgroundColor: '#027f00'})
 	}
 }
 function updateScore(amount) {
@@ -62,30 +77,30 @@ function updateScore(amount) {
 function createSmiley() {
 	smileyCount++;
 	smileyAlive++;
-	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
+	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
 	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
-		$(this).fadeOut(); //toggle('explode');
+		$(this).fadeOut(200, function() { $(this).remove(); }); //toggle('explode'); $(this).remove();
 		updateScore(1);
 		time+=2;
 		smileyAlive--;
 		clearTimeout(missedTimeout);
-		$(this).remove();
 	});
 	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 }
 function missed(id) {
 	if(gameOver == 0) {
-		updateScore(-10);
+		time-=5;
 		var y = $("#smiley"+id).offset().top;
 		var x = $("#smiley"+id).offset().left;
 		$("#smiley"+id).remove();
-		var smileyMiss = $("<img id='missed"+id+"' class='smiley missed-rotate' src='smileyMiss.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
+		var smileyMiss = $("<img id='missed"+id+"' class='missedSmiley' src='smileyMiss.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
 		$("body").append(smileyMiss);
 		$('#missed'+id).addClass('rotate');
 		smileyMiss.click(function() {
-			updateScore(-3);
+			time-=3;
+			//vibrate here;
 			smileyMiss.attr('src','blood.png');
 		});
 		setTimeout(function() {
@@ -97,7 +112,9 @@ function removeMissed(id) {
 	$('#smiley'+id).remove();
 }
 function smileyRandomHeight() {
-	return Math.round(Math.abs(Math.random()*(screenHeight)-smileyDimension));
+	var height = Math.round(Math.abs(Math.random()*(screenHeight)-smileyDimension));
+	console.log(height);
+	return height;
 }
 function smileyRandomWidth() {
 	return Math.round(Math.abs(Math.random()*(screenWidth)-smileyDimension));
