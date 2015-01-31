@@ -1,4 +1,4 @@
-var debug = 0;
+var debug = 1;
 var smileyCount = 0;
 var score = 0;
 var smileyAlive = 0;
@@ -7,7 +7,7 @@ var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
-var smileySpawnTime = 1; // seconds
+var smileySpawnTime = 0.5; // seconds
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -60,9 +60,9 @@ function createSmiley() {
 	smileyAlive++;
 	var smiley = $("<img id='smiley"+smileyCount+"' class='smiley smiley-rotate' src='smiley.png' style='width:"+smileyDimension+"px; position:absolute; top: "+smileyRandomHeight()+"px; left: "+smileyRandomWidth()+"px;' />");
 	$("body").append(smiley);
-	var missedTimeout = setTimeout(missed,(3000), smileyCount);
+	var missedTimeout = setTimeout(missed,(1500), smileyCount);
 	smiley.click(function() {
-		$(this).toggle( "explode" );
+		$(this).toggle();//explode
 		updateScore(15);
 		time+=2;
 		smileyAlive--;
