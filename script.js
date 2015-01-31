@@ -7,7 +7,7 @@ var time = 20;
 var scoreUpdateInterval, createSmileyInterval;
 var gameOver = 0;
 var screenHeight, screenWidth;
-var smileySpawnTime = 0.5; // seconds
+var smileySpawnTime = 0.85; // seconds
 
 function onLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -66,7 +66,7 @@ function createSmiley() {
 	$("body").append(smiley);
 	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
-		$(this).toggle('explode');
+		$(this).fadeOut(); //toggle('explode');
 		updateScore(1);
 		time+=2;
 		smileyAlive--;
