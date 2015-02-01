@@ -108,7 +108,7 @@ function missed(id) {
 		$('#missed'+id).addClass('rotate');
 		smileyMiss.click(function() {
 			time-=5;
-			//vibrate here;
+			navigator.notification.vibrate(2500);
 			smileyMiss.attr('src','blood.png');
 			smileyMiss.removeClass('missedSmiley');
 		});
