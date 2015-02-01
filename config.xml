@@ -7,7 +7,7 @@
     <author email="ivanorezac2@gmail.com" href="http://ivanorezac.com">
         Ivanorezac
     </author>
-    <content src="index.html" />
+    <content src="www/index.html" />
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
@@ -26,11 +26,6 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-	<uses-permission android:name="android.permission.READ_CONTACTS" />
-	<uses-permission android:name="android.permission.WRITE_CONTACTS" />
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
     <icon src="smileyMiss.png" />
-
     <access origin="*" />
 </widget>
