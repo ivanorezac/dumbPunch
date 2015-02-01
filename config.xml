@@ -26,12 +26,9 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-	<feature name="Notification">
-	    <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
-	</feature>
-	<feature name="Vibration">
-	    <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
-	</feature>
+	<uses-permission android:name="android.permission.READ_CONTACTS" />
+	<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <icon src="smileyMiss.png" />
 
