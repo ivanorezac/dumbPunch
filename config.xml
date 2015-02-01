@@ -9,7 +9,6 @@
     <content src="index.html" />
     <access origin="*" />
     <icon src="smileyMiss.png" />
-    <preference name="permissions" value="none"/>
     <preference name="orientation" value="default" />
     <preference name="fullscreen" value="true" />
     <preference name="disallowOverscroll" value="true" />
