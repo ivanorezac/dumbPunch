@@ -106,9 +106,9 @@ function missed(id) {
 		var smileyMiss = $("<img id='missed"+id+"' class='missedSmiley' src='smileyMiss.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
 		$("body").append(smileyMiss);
 		$('#missed'+id).addClass('rotate');
-		smileyMiss.click(function() {
+		$('#missed'+id).click(function() {
 			time-=5;
-			navigator.notification.vibrate(2500);
+			navigator.notification.vibrate(1000);
 			smileyMiss.attr('src','blood.png');
 			smileyMiss.removeClass('missedSmiley');
 		});
