@@ -84,7 +84,7 @@ function createSmiley() {
 	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
 		updateScore(1);
-		time+=2;
+		time+=1;
 		smileyAlive--;
 		clearTimeout(missedTimeout);
 		$(this).animate({
@@ -95,7 +95,7 @@ function createSmiley() {
 		    $(this).remove();
 		  });
 	});
-	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
+	createSmileyInterval = setTimeout(createSmiley,Math.abs(smileySpawnTime*1000-time*5)+100);
 }
 function missed(id) {
 	if(gameOver == 0) {
@@ -107,7 +107,7 @@ function missed(id) {
 		$("body").append(smileyMiss);
 		$('#missed'+id).addClass('rotate');
 		smileyMiss.click(function() {
-			time-=3;
+			time-=5;
 			//vibrate here;
 			smileyMiss.attr('src','blood.png');
 			smileyMiss.removeClass('missedSmiley');
