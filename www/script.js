@@ -25,6 +25,7 @@ function onDeviceReady() {
 	setSmileySize();
 	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 	scoreUpdateInterval = setTimeout(updateTime,1000);
+	console.log(navigator.vibrate);
 }
 function updateTime() {
 	if(gameOver == 0) {
