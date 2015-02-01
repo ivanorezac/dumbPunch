@@ -21,4 +21,13 @@
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="true" />
     <preference name="android-installLocation" value="auto" />
+    <feature name="Notification">
+    	<param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+	</feature>
+	<feature name="Vibration">
+    	<param name="android-package" value="org.apache.cordova.vibration.Vibration" />
+	</feature>
+	<feature name="Notification">
+    	<param name="ios-package" value="CDVNotification" />
+	</feature>
 </widget>
