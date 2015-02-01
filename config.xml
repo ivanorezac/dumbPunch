@@ -7,17 +7,5 @@
         Ivanorezac
     </author>
     <content src="index.html" />
-    <access origin="*" />
     <icon src="smileyMiss.png" />
-    <preference name="orientation" value="default" />
-    <preference name="fullscreen" value="true" />
-    <preference name="disallowOverscroll" value="true" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="stay-in-webview" value="false" />
-    <preference name="ios-statusbarstyle" value="black-opaque" />
-    <preference name="detect-data-types" value="true" />
-    <preference name="exit-on-suspend" value="true" />
-    <preference name="android-installLocation" value="auto" />
 </widget>
