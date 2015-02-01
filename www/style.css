@@ -1,0 +1,60 @@
+body {
+	background-color: #2d4558;
+	margin: 0;
+}
+
+img::-moz-selection{
+    background-color:Transparent;
+}
+
+img::selection {
+	background-color:Transparent;
+}
+
+.smiley {
+	touch-action: manipulation;
+	-ms-touch-action: manipulation;
+	-webkit-animation:spin 5s linear;
+    -moz-animation:spin 5s linear;
+    animation:spin 5s linear;
+}
+
+.missedSmiley {
+	touch-action: manipulation;
+	-ms-touch-action: manipulation;
+	-webkit-animation:spin 3s linear;
+    -moz-animation:spin 3s linear;
+    animation:spin 3s linear;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.scoreChange {
+	position: absolute;
+	left:0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#score {
+	color: white;
+	font-size: 25px;
+	text-align: center;
+}
+
+.changeElement {
+	color: white;
+	font-size: 15px;
+	float: left;
+	padding: 0 15px;
+}
+
+.fps {
+	width: 80px;
+	height: 40px;
+	position: absolute;
+	color: white;
+}
