@@ -7,9 +7,13 @@
     <author email="ivanorezac2@gmail.com" href="http://ivanorezac.com">
         Ivanorezac
     </author>
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <gap:platform name="winphone" />
+    <preference name="phonegap-version" value="3.6.3" />
     <content src="index.html" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <preference name="fullscreen" value="false" />
+    <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="disallowOverscroll" value="true" />
