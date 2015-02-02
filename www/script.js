@@ -105,12 +105,11 @@ function missed(id) {
 		$("#smiley"+id).remove();
 		var smileyMiss = $("<img id='missed"+id+"' class='missedSmiley' src='smileyMiss.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
 		$("body").append(smileyMiss);
-		$('#missed'+id).addClass('rotate');
 		$('#missed'+id).click(function() {
 			time-=5;
-			smileyMiss.removeClass('missedSmiley');
+			$('#missed'+id).removeClass('missedSmiley');
 			smileyMiss.attr('src','blood.png');
-			navigator.notification.vibrate(300);
+			navigator.notification.vibrate(150);
 		});
 		setTimeout(function() {
 			smileyMiss.remove();
