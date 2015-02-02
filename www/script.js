@@ -53,31 +53,20 @@ function updateScoreBoard() {
 
 function gameTime() {
 	if(time < 20) {
-		$('body').css({backgroundColor: '#b50000'})
+		$('body').css({backgroundColor: '#820101'});
 	} else if(time < 40) {
-		$('body').css({backgroundColor: '#af9e03'})
+		$('body').css({backgroundColor: '#826401'});
 	} else if(time < 60) {
-		$('body').css({backgroundColor: '#2d4558'})
+		$('body').css({backgroundColor: '#016A82'});
 	} else if(time < 80) {
-		$('body').css({backgroundColor: '#0a7548'})
+		$('body').css({backgroundColor: '#01826A'});
 	} else {
-		$('body').css({backgroundColor: '#027f00'})
+		$('body').css({backgroundColor: '#018206'});
 	}
 }
 function updateScore(amount) {
 	score += amount;
 	updateScoreBoard();
-		plusSign = '';
-	if(amount > 0) {
-		plusSign = '+';
-	}
-	var changeElement = $("<div class='changeElement'>"+plusSign+amount+"</div><br />");
-	$(".scoreChange").append(changeElement);
-	setTimeout(function() {
-		changeElement.slideUp( "slow", function() {
-		    changeElement.remove();
-		  });
-	},1500);
 }
 function createSmiley() {
 	smileyCount++;
@@ -102,7 +91,7 @@ function createSmiley() {
 }
 function missed(id) {
 	if(gameOver == 0) {
-		time-=5;
+		time-=15;
 		var y = $("#smiley"+id).offset().top;
 		var x = $("#smiley"+id).offset().left;
 		$("#smiley"+id).remove();
@@ -150,7 +139,6 @@ function doNothing() {}
 
 function countFps() {
 	getScreenSize();
-	$('.fps').css({bottom: 40, right: 80});
 	gameLoop();
 }
 

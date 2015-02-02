@@ -2,6 +2,18 @@ body {
 	background-color: #2d4558;
 	margin: 0;
 	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-image: url('texture.png');
+	background-size: cover;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-ms-transition: all 1s;
+	-o-transition: all 1s;
+    transition: all 1s;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 img::-moz-selection{
@@ -38,12 +50,14 @@ img::selection {
 	top: 0;
 	margin: 0;
 	padding: 0;
+	z-index: 1;
 }
 
 #score {
 	color: white;
 	font-size: 25px;
 	text-align: center;
+	z-index: 1;
 }
 
 .changeElement {
@@ -54,10 +68,11 @@ img::selection {
 }
 
 .fps {
-	width: 20px;
-	height: 10px;
 	position: absolute;
 	color: white;
+	z-index: 1;
+	bottom: 15px;
+	right: 15px;
 }
 
 .restart {
@@ -66,6 +81,7 @@ img::selection {
 
 .restart img {
 	max-width: 30%;
+	max-height: 30%;
 	position: absolute;
 	top: 50%;
   	left: 50%;
