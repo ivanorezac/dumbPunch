@@ -1,6 +1,7 @@
 body {
 	background-color: #2d4558;
 	margin: 0;
+	overflow: hidden;
 }
 
 img::-moz-selection{
@@ -57,4 +58,20 @@ img::selection {
 	height: 40px;
 	position: absolute;
 	color: white;
+}
+
+.restart {
+	display: none;
+}
+
+.restart img {
+	max-width: 70%;
+	position: absolute;
+	top: 50%;
+  	left: 50%;
+  	-webkit-transform: translate(-50%, -50%);
+  	-moz-transform: translate(-50%, -50%);
+  	-ms-transform: translate(-50%, -50%);
+  	-o-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);
 }

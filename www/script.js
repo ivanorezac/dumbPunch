@@ -1,13 +1,6 @@
 var debug = 0;
-var smileyCount = 0;
-var score = 0;
-var smileyAlive = 0;
-var smileyDimension = 30;
-var time = 45;
-var scoreUpdateInterval, createSmileyInterval;
-var gameOver = 0;
-var screenHeight, screenWidth;
-var smileySpawnTime = 0.5; // seconds
+var smileyCount, score, smileyAlive, smileyDimension = 30, time = 45, scoreUpdateInterval, createSmileyInterval, 
+gameOver, screenHeight, screenWidth, smileySpawnTime; // seconds
 
 function onLoad() {
 	var attachFastClick = Origami.fastclick;
@@ -25,6 +18,12 @@ function onDeviceReady() {
 	setSmileySize();
 	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 	scoreUpdateInterval = setTimeout(updateTime,1000);
+	smileyCount = 0;
+	score = 0;
+	smileyAlive = 0;
+	time = 45;
+	gameOver = 0;
+	smileySpawnTime = 0.5;
 }
 function updateTime() {
 	if(gameOver == 0) {
@@ -36,8 +35,12 @@ function updateTime() {
 			$('.smiley').remove();
 			$('.missedSmiley').remove();
 			$('.scoreChange').toggle();
-			$('#score').text('Game over! You ran out of time!');
+			$('#score').html('Too many smileys escaped!<br>Your score:'+score);
 			gameOver = 1;
+			$('.restart').fadeIn('slow');
+			$('.restart').click(function() {
+				location.reload();
+			});
 		}
 	}
 }
@@ -107,12 +110,15 @@ function missed(id) {
 		$("body").append(smileyMiss);
 		$('#missed'+id).click(function() {
 			time-=5;
-			$('#missed'+id).removeClass('missedSmiley');
-			smileyMiss.attr('src','blood.png');
+			var y = $('#missed'+id).offset().top;
+			var x = $('#missed'+id).offset().left;
+			$('#missed'+id).remove();
+			var smileyMiss = $("<img id='missed"+id+"' src='blood.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
+			$("body").append(smileyMiss);
 			navigator.notification.vibrate(150);
 		});
 		setTimeout(function() {
-			smileyMiss.remove();
+			$('#missed'+id).remove();
 		},3000);
 	}
 }
@@ -144,7 +150,7 @@ function doNothing() {}
 
 function countFps() {
 	getScreenSize();
-	$('.fps').css({top: screenHeight-40, left: screenWidth-80});
+	$('.fps').css({bottom: 40, right: 80});
 	gameLoop();
 }
 
