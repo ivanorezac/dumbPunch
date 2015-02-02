@@ -23,8 +23,6 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="BackgroundColor" value="0xffffffff "/>
     <preference name="KeepRunning" value="true"/>
-    <feature name="http://api.phonegap.com/1.0/network"/>
-    <gap:plugin name="org.apache.cordova.camera"  />
     <icon src="smileyMiss.png" />
     <access origin="*" />
 </widget>
