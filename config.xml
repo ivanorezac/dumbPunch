@@ -10,6 +10,7 @@
     <content src="index.html" />
     <preference name="permissions" value="none"/>
     <gap:plugin name="org.apache.cordova.vibration" />
+    <preference name="Fullscreen" value="true" />
     <icon src="smileyMiss.png" />
     <access origin="*" />
 </widget>
