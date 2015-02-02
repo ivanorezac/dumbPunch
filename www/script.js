@@ -25,7 +25,6 @@ function onDeviceReady() {
 	setSmileySize();
 	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 	scoreUpdateInterval = setTimeout(updateTime,1000);
-	console.log(navigator.vibrate);
 }
 function updateTime() {
 	if(gameOver == 0) {
@@ -109,11 +108,9 @@ function missed(id) {
 		$('#missed'+id).addClass('rotate');
 		$('#missed'+id).click(function() {
 			time-=5;
-			console.log('error?');
-			navigator.notification.vibrate(1000);
-			console.log('no');
-			smileyMiss.attr('src','blood.png');
 			smileyMiss.removeClass('missedSmiley');
+			smileyMiss.attr('src','blood.png');
+			navigator.notification.vibrate(300);
 		});
 		setTimeout(function() {
 			smileyMiss.remove();
