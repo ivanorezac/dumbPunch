@@ -8,6 +8,7 @@
         Ivanorezac
     </author>
     <content src="index.html" />
+    <preference name="permissions" value="none"/>
     <gap:plugin name="org.apache.cordova.vibration" />
     <icon src="smileyMiss.png" />
     <access origin="*" />
