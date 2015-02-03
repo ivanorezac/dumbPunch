@@ -6,7 +6,9 @@ body {
 	overflow-y: hidden;
 	background-image: url('texture.png');
 	background-size: cover;
-	background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
     position: fixed;
     width: 100%;
     height: 100%;
@@ -90,26 +92,24 @@ img::selection {
 
 .scoreReport {
 	display: none;
-	max-width: 90%;
-	max-height: 90%;
-	position:absolute;
-	top: 50%;
-  	left: 50%;
   	-webkit-transform: translate(-50%, -50%);
   	-moz-transform: translate(-50%, -50%);
   	-ms-transform: translate(-50%, -50%);
   	-o-transform: translate(-50%, -50%);
   	transform: translate(-50%, -50%);
   	background-color: #FF9900;
-  	padding: 10px 40px;
+  	padding: 10px;
   	border: 4px solid white;
   	color: white;
   	font-family: "Times New Roman", Times, serif;
-  	border-radius: 3px;
+  	border-radius: 5px;
   	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 	text-align: center;
+	position:absolute;
+	top: 50%;
+  	left: 50%;
 }
 
 .scoreReport h1 {
