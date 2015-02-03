@@ -1,4 +1,4 @@
-var debug = 0;
+var debug = 1;
 var smileyCount, score, smileyAlive, smileyDimension = 30, time = 45, scoreUpdateInterval, createSmileyInterval, 
 gameOver, screenHeight, screenWidth, smileySpawnTime; // seconds
 
@@ -35,10 +35,12 @@ function updateTime() {
 			$('.smiley').remove();
 			$('.missedSmiley').remove();
 			$('.scoreChange').toggle();
-			$('#score').html('Too many smileys escaped!<br>Your score:'+score);
+			setScoreBoardIconSize();
+			$('#your-score').text(score);
 			gameOver = 1;
-			$('.restart').fadeIn('slow');
-			$('.restart').click(function() {
+			$('#score').toggle();
+			$('.scoreReport').fadeIn('slow');
+			$('#restart').click(function() {
 				location.reload();
 			});
 		}
@@ -91,7 +93,7 @@ function createSmiley() {
 }
 function missed(id) {
 	if(gameOver == 0) {
-		time-=15;
+		time-=5;
 		var y = $("#smiley"+id).offset().top;
 		var x = $("#smiley"+id).offset().left;
 		$("#smiley"+id).remove();
@@ -163,4 +165,9 @@ var fps = {
 function gameLoop(){
 	setTimeout( gameLoop,1000 / 60 );
 	document.querySelector("#fps").innerHTML = fps.getFPS();
+}
+
+function setScoreBoardIconSize() {
+	$('.scoreReport img').height(smileyDimension);
+	$('#restart').height(smileyDimension*2);
 }
