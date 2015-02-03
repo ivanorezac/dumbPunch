@@ -113,9 +113,6 @@ function missed(id) {
 		},3000);
 	}
 }
-function removeMissed(id) {
-	$('#smiley'+id).remove();
-}
 function smileyRandomHeight() {
 	return Math.round(Math.abs(Math.random()*(screenHeight)-smileyDimension));
 }
