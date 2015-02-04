@@ -1,4 +1,4 @@
-var debug = 1;
+var debug = 0;
 var smileyCount, score, smileyAlive, smileyDimension = 30, time = 45, scoreUpdateInterval, createSmileyInterval, 
 gameOver, screenHeight, screenWidth, smileySpawnTime, fileSystem; // seconds
 
