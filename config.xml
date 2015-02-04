@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.ivanorezac.dumbPunch" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Dumb Punch</name>
+    <description>
+        A smiple smiley punching app
+    </description>
+    <author email="ivanorezac2@gmail.com" href="http://ivanorezac.com">
+        Ivanorezac
+    </author>
+    <content src="index.html" />
+    <preference name="permissions" value="none"/>
+    <gap:plugin name="org.apache.cordova.file" />
+    <preference name="Fullscreen" value="true" />
+    <icon src="smileyMiss.png" />
+    <access origin="*" />
+</widget>
