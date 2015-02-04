@@ -25,10 +25,13 @@ function onDeviceReady() {
 	gameOver = 0;
 	smileySpawnTime = 0.3;
 	gameTime();
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, function() { console.log(error.code); });
+	console.log('a');
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, function() { console.log('b'+error.code); });
+	console.log('c');
 }
 
 function onFileSystemSuccess(FS) {
+	console.log('d');
 	fileSystem = FS;
 	console.log("File system name:"+fileSystem.name+". Root entry name is:"+fileSystem.root.name+".");
 	fileSystem.root.getFile("test.txt", {create:true}, appendFile, function() { console.log(error.code); });
