@@ -1,6 +1,6 @@
-var debug = 0;
+var debug = 1;
 var smileyCount, score, smileyAlive, smileyDimension = 30, time = 45, scoreUpdateInterval, createSmileyInterval, 
-gameOver, screenHeight, screenWidth, smileySpawnTime; // seconds
+gameOver, screenHeight, screenWidth, smileySpawnTime, fileSystem; // seconds
 
 function onLoad() {
 	var attachFastClick = Origami.fastclick;
@@ -21,10 +21,53 @@ function onDeviceReady() {
 	smileyCount = 0;
 	score = 0;
 	smileyAlive = 0;
-	time = 45;
+	time = 1;
 	gameOver = 0;
-	smileySpawnTime = 0.5;
+	smileySpawnTime = 0.3;
+	gameTime();
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, function() { console.log(error.code); });
 }
+
+function onFileSystemSuccess(FS) {
+	fileSystem = FS;
+	console.log("File system name:"+fileSystem.name+". Root entry name is:"+fileSystem.root.name+".");
+	fileSystem.root.getFile("test.txt", {create:true}, appendFile, function() { console.log(error.code); });
+	fileSystem.root.createreader().readEntries(gotFiles, function() {console.log(error.code); });
+	fileSystem.root.getFile("test.txt", {create:true}, readFile, function() { console.log(error.code); });
+}
+
+function readFile(f) {
+	reader = new FileReader();
+	reader.onLoadend = function(e) {
+		console.log('e.target.resault: '+e.target.resault+" \n ");
+	}
+	reader.readAsText(f);
+}
+
+function appendFile(f) {
+	f.createWriter(function(writerOb) {
+		writerOb.onWrite=function() {
+			console.log('wrote');
+		}
+		writerOb.seek(writerOb.length);
+		writerOb.write("Working m8\n");
+	});
+}
+
+function gotFiles(entries) {
+	var s = "";
+	for(var i=0, len=entries.length; i<len; i++) {
+		s+=entries[i].fullPath;
+		if(entries[i].isFile) {
+			s+=" [F]";
+		} else {
+			s+=" [D]";
+		}
+		s+="\n";
+	}
+	console.log(s);
+}
+
 function updateTime() {
 	if(gameOver == 0) {
 		updateScoreBoard();
@@ -49,18 +92,18 @@ function updateTime() {
 function updateScoreBoard() {
 	if(gameOver == 0) {
 		$('#score').text(score);
-		gameTime();
 	}
 }
 
 function gameTime() {
-	if(time < 20) {
+	var color = Math.ceil(Math.random()*5)
+	if(color == 1) {
 		$('body').css({backgroundColor: '#820101'});
-	} else if(time < 40) {
+	} else if(color == 2) {
 		$('body').css({backgroundColor: '#826401'});
-	} else if(time < 60) {
+	} else if(color == 3) {
 		$('body').css({backgroundColor: '#016A82'});
-	} else if(time < 80) {
+	} else if(color == 4) {
 		$('body').css({backgroundColor: '#01826A'});
 	} else {
 		$('body').css({backgroundColor: '#018206'});
@@ -78,7 +121,6 @@ function createSmiley() {
 	var missedTimeout = setTimeout(missed,(5000), smileyCount);
 	smiley.click(function() {
 		updateScore(1);
-		time+=1;
 		smileyAlive--;
 		clearTimeout(missedTimeout);
 		$(this).animate({
@@ -89,28 +131,12 @@ function createSmiley() {
 		    $(this).remove();
 		  });
 	});
-	createSmileyInterval = setTimeout(createSmiley,Math.abs(smileySpawnTime*1000-time*5)+100);
+	createSmileyInterval = setTimeout(createSmiley,smileySpawnTime*1000);
 }
 function missed(id) {
 	if(gameOver == 0) {
-		time-=5;
-		var y = $("#smiley"+id).offset().top;
-		var x = $("#smiley"+id).offset().left;
-		$("#smiley"+id).remove();
-		var smileyMiss = $("<img id='missed"+id+"' class='missedSmiley' src='smileyMiss.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
-		$("body").append(smileyMiss);
-		$('#missed'+id).click(function() {
-			time-=5;
-			var y = $('#missed'+id).offset().top;
-			var x = $('#missed'+id).offset().left;
-			$('#missed'+id).remove();
-			var smileyMiss = $("<img id='missed"+id+"' src='blood.png' style='width:"+smileyDimension+"px; position:absolute; top: "+y+"px; left: "+x+"px;' />");
-			$("body").append(smileyMiss);
-			navigator.notification.vibrate(150);
-		});
-		setTimeout(function() {
-			$('#missed'+id).remove();
-		},3000);
+		time=0;
+		updateTime();
 	}
 }
 function smileyRandomHeight() {
